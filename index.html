@@ -1,119 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" class="bg-[#09090b] text-zinc-100 antialiased selection:bg-white selection:text-black">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alen Guiwan — Work in Progress</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Editorial Google Fonts (Syne + Instrument Serif + Plus Jakarta Sans) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:italic@400&family=Plus+Jakarta+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-
-  <style>
-    /* Custom Font Families */
-    .font-syne { font-family: 'Syne', sans-serif; }
-    .font-serif-italic { font-family: 'Instrument Serif', serif; font-style: italic; }
-    .font-body { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-    /* Gentle Animations */
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.15; }
-      50% { transform: translateY(-10px) scale(1.05); opacity: 0.25; }
-    }
-    @keyframes rotateSlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .animate-float { animation: floatSlow 8s ease-in-out infinite; }
-    .animate-spin-slow { animation: rotateSlow 20s linear infinite; }
-    .animate-fade-up { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  </style>
-</head>
-<body class="font-body min-h-screen flex flex-col justify-between relative overflow-hidden">
-
-  <!-- Ambient Background Overhead Glow (Studio Lighting Effect) -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-b from-zinc-500/20 via-zinc-400/10 to-transparent blur-[120px] rounded-full pointer-events-none animate-float"></div>
-
-  <!-- Top Minimal Navbar -->
-  <header class="w-full max-w-6xl mx-auto px-6 py-8 flex justify-between items-center z-10">
-    <span class="font-syne font-extrabold text-sm tracking-widest uppercase text-zinc-300">
-      ALEN.DEV
-    </span>
-    <div class="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/60 backdrop-blur-md text-xs font-medium text-zinc-400">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span>STATUS: COOKING</span>
-    </div>
-  </header>
-
-  <!-- Main Hero Section (Center Stage) -->
-  <main class="w-full max-w-4xl mx-auto px-6 py-12 flex flex-col items-center text-center z-10 animate-fade-up">
-    
-    <!-- Playful Eyebrow Tag -->
-    <p class="text-xs uppercase tracking-[0.25em] text-zinc-500 font-semibold mb-6">
-      [ 01 / WORK IN PROGRESS ]
-    </p>
-
-    <!-- Editorial High-Contrast Headline (Like reference "FULL-SERVICE AGENCY") -->
-    <h1 class="font-syne text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight uppercase leading-[0.9] text-white mb-6">
-      WORK IN <br />
-      <span class="font-serif-italic font-normal tracking-normal text-zinc-300 lowercase">
-        progress.
-      </span>
-    </h1>
-
-    <!-- Friendly / Playful Description -->
-    <p class="text-base sm:text-lg text-zinc-400 max-w-lg leading-relaxed mb-10">
-      Currently brewing coffee, refactoring clean code, and polishing pixels behind the scenes. 
-      The full experience is dropping soon—but you don't have to wait to say hello.
-    </p>
-
-    <!-- Minimalist Call to Action -->
-    <div class="flex flex-wrap items-center justify-center gap-4">
-      <a href="mailto:your-email@example.com" 
-         class="px-6 py-3 rounded-full bg-white text-zinc-950 font-semibold text-sm hover:bg-zinc-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
-        Get in Touch
-      </a>
-      <a href="https://github.com/zcerabrehm" target="_blank" 
-         class="px-6 py-3 rounded-full border border-zinc-800 hover:border-zinc-600 bg-zinc-900/40 text-zinc-300 font-semibold text-sm transition-all duration-300 hover:bg-zinc-900">
-        GitHub Profile ↗
-      </a>
-    </div>
-
-    <!-- Rotating Agency-Style Stamp (Like the downward circle in your reference) -->
-    <div class="mt-16 sm:mt-20 flex items-center justify-center">
-      <div class="relative w-24 h-24 flex items-center justify-center">
-        <!-- Slowly Rotating Outer Text Border -->
-        <svg class="w-full h-full animate-spin-slow text-zinc-700" viewBox="0 0 100 100">
-          <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent"/>
-          <text class="text-[10.5px] font-mono tracking-widest uppercase fill-current">
-            <textPath xlink:href="#circlePath">
-              • LAUNCHING SOON • PORTFOLIO 2026
-            </textPath>
-          </text>
-        </svg>
-        <!-- Center Icon -->
-        <div class="absolute text-zinc-500 text-sm">
-          ✦
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Minimal Footer -->
-  <footer class="w-full max-w-6xl mx-auto px-6 py-8 flex justify-between items-center text-xs text-zinc-600 border-t border-zinc-900 z-10 font-mono">
-    <span>© 2026 ALEN GUIWAN</span>
-    <span>ALL RIGHTS RESERVED</span>
-  </footer>
-
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
