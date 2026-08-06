@@ -51,6 +51,11 @@
   }
 }
 
+/* Hidden until intro timeline reveals (GSAP) */
+[data-intro] {
+  opacity: 0;
+}
+
 @layer utilities {
   .text-stroke {
     -webkit-text-stroke: 1px rgba(243, 243, 240, 0.4);

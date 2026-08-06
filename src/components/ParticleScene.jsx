@@ -17,31 +17,34 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
     const mount = mountRef.current;
     if (!mount) return;
 
-    let width = mount.clientWidth || window.innerWidth;
-    let height = mount.clientHeight || window.innerHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(width, height);
+    renderer.setSize(width, height, false);
     renderer.domElement.style.display = "block";
+    renderer.domElement.style.position = "absolute";
+    renderer.domElement.style.inset = "0";
     renderer.domElement.style.width = "100%";
     renderer.domElement.style.height = "100%";
     mount.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 200);
     camera.position.z = 9;
 
-    const COUNT = reduce ? 700 : 1600;
+    // Oversized cloud so rotation / parallax never exposes empty edges
+    const COUNT = reduce ? 1200 : 2800;
     const positions = new Float32Array(COUNT * 3);
     const colors = new Float32Array(COUNT * 3);
     const gold = new THREE.Color(accent);
     const white = new THREE.Color("#ffffff");
 
     for (let i = 0; i < COUNT; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 16;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
+      positions[i * 3] = (Math.random() - 0.5) * 42;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 28;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 18;
 
       const c = gold.clone().lerp(white, Math.random() * 0.7);
       colors[i * 3] = c.r;
@@ -74,11 +77,11 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
     window.addEventListener("mousemove", onMove, { passive: true });
 
     const onResize = () => {
-      width = mount.clientWidth || window.innerWidth;
-      height = mount.clientHeight || window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
+      renderer.setSize(width, height, false);
     };
     window.addEventListener("resize", onResize);
 
@@ -89,10 +92,11 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
       const t = clock.getElapsedTime();
       points.rotation.y = t * 0.04;
       points.rotation.x = Math.sin(t * 0.15) * 0.08;
-      points.position.x += (targetX * 0.8 - points.position.x) * 0.04;
-      points.position.y += (-targetY * 0.5 - points.position.y) * 0.04;
-      camera.position.x += (targetX * 0.35 - camera.position.x) * 0.04;
-      camera.position.y += (-targetY * 0.25 - camera.position.y) * 0.04;
+      // Keep parallax subtle so the oversized field stays edge-to-edge
+      points.position.x += (targetX * 0.35 - points.position.x) * 0.04;
+      points.position.y += (-targetY * 0.22 - points.position.y) * 0.04;
+      camera.position.x += (targetX * 0.18 - camera.position.x) * 0.04;
+      camera.position.y += (-targetY * 0.12 - camera.position.y) * 0.04;
       camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
       raf = requestAnimationFrame(tick);
