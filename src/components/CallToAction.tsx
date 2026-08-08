@@ -112,6 +112,8 @@ export default function CallToAction({ onCopyEmail }: Props) {
             >
               <motion.a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent(CTA.mailSubject)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 ref={primaryRef}
                 data-magnetic
                 data-cursor="engage"

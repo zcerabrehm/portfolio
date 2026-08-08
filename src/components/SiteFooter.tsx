@@ -76,6 +76,8 @@ export default function SiteFooter() {
           <div className="flex flex-col items-center gap-3 lg:items-end">
             <a
               href={`mailto:${SITE.email}?subject=${encodeURIComponent("Project inquiry from alenguiwan.dev")}`}
+              target="_blank"
+              rel="noopener noreferrer"
               data-cursor="hello"
               className="group inline-flex items-center gap-3 rounded-full border border-signal bg-signal px-6 py-3.5 font-mono text-[11px] font-semibold uppercase tracking-label text-void transition-shadow hover:shadow-signal"
             >
@@ -126,6 +128,8 @@ export default function SiteFooter() {
             <div className="space-y-2">
               <a
                 href={`mailto:${SITE.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 data-cursor="copy"
                 className="group flex items-center justify-between border border-white/10 bg-black/40 px-4 py-3.5 transition-colors hover:border-signal/45 hover:bg-signal/10"
               >

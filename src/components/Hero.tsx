@@ -256,6 +256,8 @@ export default function Hero() {
             >
               <a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent("Hello from alenguiwan.dev")}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 data-cursor="hello"
                 className="group inline-flex items-center gap-2 rounded-full border border-signal bg-signal px-5 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-label text-void transition-[transform,box-shadow] duration-200 ease-out-expo hover:-translate-y-0.5 hover:shadow-signal"
               >

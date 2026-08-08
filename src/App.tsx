@@ -15,6 +15,7 @@ import Loader from "./components/Loader";
 import { PROJECTS, type Project } from "./data/portfolioData";
 import { useCommandPalette } from "./hooks/useCommandPalette";
 import { useContentGuard } from "./hooks/useContentGuard";
+import { useExternalLinks } from "./hooks/useExternalLinks";
 import { playUiTick } from "./lib/uiSound";
 
 function scrollToId(id: string) {
@@ -32,6 +33,7 @@ export default function App() {
   const [toast, setToast] = useState<string | null>(null);
 
   useContentGuard();
+  useExternalLinks();
 
   const showToast = useCallback((message: string) => {
     setToast(message);
