@@ -102,23 +102,26 @@ export default function About() {
             />
           </motion.div>
 
-          <motion.div variants={staggerItem} className="lg:col-span-7">
-            <div className="space-y-4">
+          <motion.div
+            variants={staggerItem}
+            className="text-center lg:col-span-7 lg:text-left"
+          >
+            <div className="mx-auto max-w-xl space-y-4 lg:mx-0">
               {ABOUT.body.map((para) => (
                 <p
                   key={para.slice(0, 28)}
-                  className="max-w-xl text-[15px] leading-relaxed text-fog sm:text-base"
+                  className="text-pretty text-[15px] leading-relaxed text-fog sm:text-base"
                 >
                   {para}
                 </p>
               ))}
             </div>
 
-            <div className="mt-8 grid gap-2 sm:grid-cols-3">
+            <div className="mt-8 grid gap-2 text-left sm:grid-cols-3">
               {ABOUT.facts.map((fact) => (
                 <div
                   key={fact.label}
-                  className="border border-white/10 bg-black/35 px-3 py-3 backdrop-blur-md"
+                  className="border border-white/10 bg-black/35 px-3 py-3 text-left backdrop-blur-md"
                 >
                   <p className="font-mono text-[10px] uppercase tracking-label text-mute">
                     {fact.label}

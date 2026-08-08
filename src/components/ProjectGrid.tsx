@@ -70,7 +70,7 @@ export default function ProjectGrid({ onOpen }: Props) {
           </motion.div>
           <motion.p
             variants={staggerItem}
-            className="max-w-xs font-mono text-[11px] leading-relaxed text-mute"
+            className="max-w-xs text-pretty font-mono text-[11px] leading-relaxed text-mute"
           >
             Work I have shipped with a team. Open a card for the stack, problems
             we hit, and how it is built.

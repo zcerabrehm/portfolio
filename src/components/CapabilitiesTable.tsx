@@ -64,7 +64,7 @@ export default function CapabilitiesTable() {
           </motion.div>
           <motion.p
             variants={staggerItem}
-            className="max-w-sm font-mono text-[11px] leading-relaxed text-mute"
+            className="max-w-sm text-pretty font-mono text-[11px] leading-relaxed text-mute"
           >
             Full code, low code, hardware, and UI. From React and Laravel to
             GoHighLevel, WordPress, and ESP32.
@@ -82,7 +82,7 @@ export default function CapabilitiesTable() {
             <motion.article
               key={job.id}
               variants={staggerItem}
-              className="border border-white/10 bg-black/35 p-4 backdrop-blur-md"
+              className="border border-white/10 bg-black/35 p-4 text-left backdrop-blur-md"
             >
               <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                 <p className="font-mono text-[10px] uppercase tracking-label text-signal">
@@ -95,7 +95,9 @@ export default function CapabilitiesTable() {
               <h3 className="font-display text-base font-semibold text-chalk">
                 {job.org}
               </h3>
-              <p className="mt-2 text-xs leading-relaxed text-mute">{job.detail}</p>
+              <p className="mt-2 text-pretty text-left text-xs leading-relaxed text-mute">
+                {job.detail}
+              </p>
             </motion.article>
           ))}
         </motion.div>
@@ -113,7 +115,7 @@ export default function CapabilitiesTable() {
               variants={staggerItem}
               custom={i}
               whileHover={{ y: -4, borderColor: "rgba(204,255,0,0.35)" }}
-              className="group relative overflow-hidden border border-white/10 bg-black/40 p-4 backdrop-blur-md transition-colors sm:p-5"
+              className="group relative overflow-hidden border border-white/10 bg-black/40 p-4 text-left backdrop-blur-md transition-colors sm:p-5"
             >
               <div className="mb-3 flex items-start justify-between gap-2">
                 <span className="font-mono text-[10px] text-signal">

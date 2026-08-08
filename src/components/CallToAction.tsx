@@ -100,7 +100,7 @@ export default function CallToAction({ onCopyEmail }: Props) {
 
               <motion.p
                 variants={staggerItem}
-                className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-mute/90 sm:text-[15px] md:mx-0"
+                className="mx-auto mt-5 max-w-lg text-pretty text-sm leading-relaxed text-mute/90 sm:text-[15px] md:mx-0"
               >
                 {CTA.body}
               </motion.p>

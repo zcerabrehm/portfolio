@@ -37,12 +37,11 @@ export default function Navbar({ onOpenPalette }: Props) {
       >
         <a
           href="#top"
-          className="brand-mark shrink-0 rounded-full px-2.5 py-1.5 sm:px-3"
+          className="brand-mark shrink-0 rounded-full px-2.5 py-1.5 text-[10px] sm:px-3 sm:text-[11px]"
           data-cursor="home"
           aria-label={SITE.brand}
         >
-          <span className="sm:hidden">AG</span>
-          <span className="hidden sm:inline">{SITE.brand}</span>
+          {SITE.brand}
         </a>
 
         <nav className="hidden items-center gap-0.5 md:flex">
@@ -69,7 +68,7 @@ export default function Navbar({ onOpenPalette }: Props) {
             type="button"
             onClick={onOpenPalette}
             data-cursor="command"
-            className="group flex items-center gap-2 rounded-full border border-white/10 bg-void/50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-label text-mute transition-[border-color,color,background-color] duration-200 hover:border-signal/40 hover:bg-signal/10 hover:text-chalk"
+            className="group hidden items-center gap-2 rounded-full border border-white/10 bg-void/50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-label text-mute transition-[border-color,color,background-color] duration-200 hover:border-signal/40 hover:bg-signal/10 hover:text-chalk md:flex"
             aria-label="Open command palette"
           >
             <kbd className="rounded-full border border-white/10 bg-black/40 px-1.5 py-0.5 text-[9px] text-mute">
@@ -105,16 +104,6 @@ export default function Navbar({ onOpenPalette }: Props) {
               {link.label}
             </a>
           ))}
-          <button
-            type="button"
-            onClick={() => {
-              setMobileOpen(false);
-              onOpenPalette();
-            }}
-            className="rounded-full border border-signal/30 bg-signal/10 px-4 py-3 text-left font-mono text-xs uppercase tracking-label text-signal"
-          >
-            Open command palette · Ctrl+K
-          </button>
         </nav>
       </div>
     </header>

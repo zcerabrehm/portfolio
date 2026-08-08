@@ -244,7 +244,7 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="show"
-              className="mx-auto mt-4 max-w-md font-mono text-[12px] leading-relaxed text-mute sm:mt-5 sm:text-[13px] lg:mx-0"
+              className="mx-auto mt-4 max-w-md text-pretty font-mono text-[12px] leading-relaxed text-mute sm:mt-5 sm:text-[13px] lg:mx-0"
             >
               Hi, I&apos;m Alen. I design and build web stuff people actually
               use, from clean interfaces to the backend that keeps them running.
