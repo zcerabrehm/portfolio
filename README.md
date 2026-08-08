@@ -1,4 +1,4 @@
-# ✦ ALEN.DEV — Creative Engineering & Automation Portfolio
+# ✦ alenguiwan.dev — Portfolio
 
 <div align="left">
   <img src="https://img.shields.io/badge/STATUS-COOKING%20IN%20PROGRESS-10b981?style=for-the-badge&labelColor=070707" alt="Status: Cooking" />
@@ -11,7 +11,8 @@
 
 ## **Overview**
 
-**ALEN.DEV** is a high-contrast, editorial portfolio landing page engineered for creative engineering, full-stack systems, and core marketing automation architectures. 
+**alenguiwan.dev** is a high-contrast, editorial portfolio for full stack web development and production systems.
+
 
 Currently serving an interactive **"Work in Progress"** experience featuring real-time physics-based cursor telemetry, staggered exponential reveal animations, and a dynamic mercury/chrome lava lamp background—all optimized at an **80% compact editorial scale** for modern high-density displays.
 

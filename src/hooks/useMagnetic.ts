@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef } from "react";
 
-/**
- * Magnetic pull toward cursor. Attach returned callback ref to the element.
- */
-export function useMagnetic(strength = 0.35) {
-  const elRef = useRef(null);
+/** Magnetic pull toward cursor. Attach returned callback ref to the element. */
+export function useMagnetic<T extends HTMLElement = HTMLElement>(
+  strength = 0.35,
+) {
+  const elRef = useRef<T | null>(null);
 
   const handleMove = useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       const el = elRef.current;
       if (!el) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -29,7 +29,7 @@ export function useMagnetic(strength = 0.35) {
   }, []);
 
   const magneticRef = useCallback(
-    (node) => {
+    (node: T | null) => {
       const previous = elRef.current;
       if (previous) {
         previous.removeEventListener("mousemove", handleMove);

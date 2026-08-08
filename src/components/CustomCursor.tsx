@@ -4,10 +4,6 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 const INTERACTIVE =
   "a, button, [data-magnetic], [data-cursor], input, textarea, [role='button']";
 
-/**
- * Dual-layer morphing cursor — fine pointers only.
- * Position is driven entirely by motion values so scale never resets to (0,0).
- */
 export default function CustomCursor() {
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
@@ -26,10 +22,9 @@ export default function CustomCursor() {
     if (!mq.matches) return undefined;
 
     document.body.classList.add("custom-cursor-active");
-
     let hasMoved = false;
 
-    const move = (e) => {
+    const move = (e: MouseEvent) => {
       mx.set(e.clientX);
       my.set(e.clientY);
       if (!hasMoved) {
@@ -44,10 +39,10 @@ export default function CustomCursor() {
     };
     const down = () => setPressed(true);
     const up = () => setPressed(false);
-
-    const over = (e) => {
-      const el = e.target.closest(INTERACTIVE);
-      setLabel(el?.getAttribute("data-cursor") ?? "");
+    const over = (e: MouseEvent) => {
+      const t = e.target as HTMLElement | null;
+      const el = t?.closest?.(INTERACTIVE) as HTMLElement | null;
+      setLabel(el?.getAttribute?.("data-cursor") ?? "");
       setHovering(!!el);
     };
 
@@ -67,8 +62,7 @@ export default function CustomCursor() {
       window.removeEventListener("mouseup", up);
       document.removeEventListener("mouseover", over);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mx, my]);
 
   if (!finePointer) return null;
 
@@ -78,38 +72,24 @@ export default function CustomCursor() {
       aria-hidden="true"
     >
       <motion.div
-        className="absolute left-0 top-0 h-2 w-2 rounded-full bg-ember will-change-transform"
-        style={{
-          x: mx,
-          y: my,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{
-          opacity: visible ? 1 : 0,
-          scale: pressed ? 0.35 : 1,
-        }}
+        className="absolute left-0 top-0 h-2 w-2 rounded-full bg-signal will-change-transform"
+        style={{ x: mx, y: my, translateX: "-50%", translateY: "-50%" }}
+        animate={{ opacity: visible ? 1 : 0, scale: pressed ? 0.35 : 1 }}
         transition={{ duration: 0.15 }}
       />
-
       <motion.div
         className="absolute left-0 top-0 flex items-center justify-center rounded-full border border-white/55 will-change-transform"
-        style={{
-          x: ringX,
-          y: ringY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
+        style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
         animate={{
           width: hovering ? 92 : 42,
           height: hovering ? 92 : 42,
           opacity: visible ? 1 : 0,
           scale: pressed ? 0.82 : 1,
           backgroundColor: hovering
-            ? "rgba(232,255,77,0.14)"
-            : "rgba(232,255,77,0)",
+            ? "rgba(204,255,0,0.14)"
+            : "rgba(204,255,0,0)",
           borderColor: hovering
-            ? "rgba(232,255,77,0.55)"
+            ? "rgba(204,255,0,0.55)"
             : "rgba(255,255,255,0.55)",
         }}
         transition={{ type: "spring", damping: 20, stiffness: 260 }}
@@ -118,7 +98,7 @@ export default function CustomCursor() {
           <motion.span
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="max-w-[72%] truncate text-center font-mono text-[9px] uppercase tracking-widest text-paper"
+            className="max-w-[72%] truncate text-center font-mono text-[9px] uppercase tracking-widest text-chalk"
           >
             {label}
           </motion.span>

@@ -1,13 +1,16 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import PropTypes from "prop-types";
 
-/**
- * Lightweight WebGL particle field for the hero backdrop.
- * Lazy-loaded so Three stays off the critical path.
- */
-export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
-  const mountRef = useRef(null);
+interface Props {
+  accent?: string;
+  className?: string;
+}
+
+export default function ParticleScene({
+  accent = "#ccff00",
+  className = "",
+}: Props) {
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -17,8 +20,10 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
     const mount = mountRef.current;
     if (!mount) return;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    let width = Math.max(mount.clientWidth || window.innerWidth, 1);
+    let height = Math.max(mount.clientHeight || window.innerHeight, 1);
+    let active = true;
+    let running = false;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -34,8 +39,7 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
     const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 200);
     camera.position.z = 9;
 
-    // Oversized cloud so rotation / parallax never exposes empty edges
-    const COUNT = reduce ? 1200 : 2800;
+    const COUNT = reduce ? 900 : 2200;
     const positions = new Float32Array(COUNT * 3);
     const colors = new Float32Array(COUNT * 3);
     const gold = new THREE.Color(accent);
@@ -45,7 +49,6 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
       positions[i * 3] = (Math.random() - 0.5) * 42;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 28;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 18;
-
       const c = gold.clone().lerp(white, Math.random() * 0.7);
       colors[i * 3] = c.r;
       colors[i * 3 + 1] = c.g;
@@ -70,29 +73,36 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
 
     let targetX = 0;
     let targetY = 0;
-    const onMove = (e) => {
+    const onMove = (e: MouseEvent) => {
+      if (!active) return;
       targetX = (e.clientX / window.innerWidth - 0.5) * 2;
       targetY = (e.clientY / window.innerHeight - 0.5) * 2;
     };
     window.addEventListener("mousemove", onMove, { passive: true });
 
     const onResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      width = Math.max(mount.clientWidth || window.innerWidth, 1);
+      height = Math.max(mount.clientHeight || window.innerHeight, 1);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height, false);
     };
     window.addEventListener("resize", onResize);
+    const ro =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(onResize)
+        : null;
+    ro?.observe(mount);
+    requestAnimationFrame(onResize);
 
     const clock = new THREE.Clock();
-    let raf;
+    let raf = 0;
 
     const tick = () => {
+      if (!running) return;
       const t = clock.getElapsedTime();
       points.rotation.y = t * 0.04;
       points.rotation.x = Math.sin(t * 0.15) * 0.08;
-      // Keep parallax subtle so the oversized field stays edge-to-edge
       points.position.x += (targetX * 0.35 - points.position.x) * 0.04;
       points.position.y += (-targetY * 0.22 - points.position.y) * 0.04;
       camera.position.x += (targetX * 0.18 - camera.position.x) * 0.04;
@@ -102,16 +112,51 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
       raf = requestAnimationFrame(tick);
     };
 
+    const start = () => {
+      if (reduce || running) return;
+      running = true;
+      clock.start();
+      raf = requestAnimationFrame(tick);
+    };
+
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
     if (reduce) {
       renderer.render(scene, camera);
     } else {
-      raf = requestAnimationFrame(tick);
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          active = Boolean(entry?.isIntersecting);
+          if (active) start();
+          else stop();
+        },
+        { threshold: 0.05 },
+      );
+      io.observe(mount);
+
+      return () => {
+        stop();
+        io.disconnect();
+        window.removeEventListener("mousemove", onMove);
+        window.removeEventListener("resize", onResize);
+        ro?.disconnect();
+        geometry.dispose();
+        material.dispose();
+        renderer.dispose();
+        if (renderer.domElement.parentNode === mount) {
+          mount.removeChild(renderer.domElement);
+        }
+      };
     }
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
+      ro?.disconnect();
       geometry.dispose();
       material.dispose();
       renderer.dispose();
@@ -129,8 +174,3 @@ export default function ParticleScene({ accent = "#e8ff4d", className = "" }) {
     />
   );
 }
-
-ParticleScene.propTypes = {
-  accent: PropTypes.string,
-  className: PropTypes.string,
-};

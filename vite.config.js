@@ -4,6 +4,10 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    // Prefer TypeScript sources over legacy .jsx/.js twins
+    extensions: [".mjs", ".mts", ".ts", ".tsx", ".jsx", ".js", ".json"],
+  },
   build: {
     // The `webgl` chunk (lazy-loaded) exceeds the default 500kb warning;
     // it's deliberately deferred so it never blocks the critical path.
@@ -13,9 +17,6 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("gsap") || id.includes("lenis")) {
-              return "animations";
-            }
             if (id.includes("three")) {
               return "webgl";
             }
