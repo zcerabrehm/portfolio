@@ -9,19 +9,15 @@ const ParticleScene = lazy(() => import("./ParticleScene"));
 
 const CODE_LOOP: readonly string[] = [
   "$ whoami",
-  "hey, i'm alen",
   "full stack + ui/ux · philippines",
   "",
   "$ day_job",
   "web developer · shipping live sites",
   "",
-  "$ after_hours",
-  "pc tuning · dac/amp setups",
-  "low latency audio · side builds",
-  "",
   "$ also_into",
   "server security tests",
   "multiplayer db edge cases",
+  "pc builds · audio gear",
   "",
   "$ status",
   "online · open for collabs",
@@ -164,7 +160,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="snap-section relative isolate flex h-[100svh] flex-col overflow-hidden border-b border-white/10 bg-void pt-20 sm:pt-24"
+      className="snap-section snap-section--fold relative isolate flex flex-col border-b border-white/10 bg-void pt-20 sm:pt-24"
     >
       <LivingBackground variant="hero" />
       <div
@@ -189,16 +185,16 @@ export default function Hero() {
       <motion.span
         className="giant-index right-0 top-1/2 z-[1] -translate-y-1/2 opacity-40"
         aria-hidden="true"
-        initial={{ opacity: 0, x: 40 }}
+        initial={{ opacity: 0, x: 24 }}
         animate={{ opacity: 0.4, x: 0 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         00
       </motion.span>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-6 sm:px-6 sm:py-8">
-        <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-8">
-          <div className="text-center lg:col-span-7 lg:text-left">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-4 sm:px-6 sm:py-8">
+        <div className="grid flex-1 items-center gap-5 lg:grid-cols-12 lg:gap-8">
+          <div className="flex flex-col justify-center text-center lg:col-span-7 lg:text-left">
             <motion.p
               custom={0}
               variants={fadeUp}
@@ -209,7 +205,7 @@ export default function Hero() {
               {SITE.role}
             </motion.p>
 
-            <h1 className="text-balance font-display text-[clamp(2.1rem,7.5vw,5.4rem)] font-bold leading-[0.88] tracking-tightest">
+            <h1 className="text-balance font-display text-[clamp(3.25rem,15vw,5.4rem)] font-bold leading-[0.86] tracking-tightest sm:text-[clamp(2.6rem,8vw,5.4rem)]">
               <motion.span
                 custom={1}
                 variants={fadeUp}
@@ -244,11 +240,11 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="show"
-              className="mx-auto mt-4 max-w-md text-pretty font-mono text-[12px] leading-relaxed text-mute sm:mt-5 sm:text-[13px] lg:mx-0"
+              className="mx-auto mt-5 max-w-md text-pretty font-mono text-[13px] leading-relaxed text-mute sm:mt-5 sm:text-[13px] lg:mx-0"
             >
-              Hi, I&apos;m Alen. I design and build web stuff people actually
-              use, from clean interfaces to the backend that keeps them running.
-              Always happy to talk projects over email or Discord.
+              Full stack builds and clean UI — from the interface people touch
+              to the backend that keeps it running. Open for collabs over
+              email&nbsp;or&nbsp;Discord.
             </motion.p>
 
             <motion.div
@@ -256,7 +252,7 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="show"
-              className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-6 lg:justify-start"
+              className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-6 lg:justify-start"
             >
               <a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent("Hello from alenguiwan.dev")}`}
@@ -287,18 +283,11 @@ export default function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="mt-6 flex justify-center sm:mt-0 lg:col-span-5 lg:justify-end"
+            className="mt-2 flex justify-center sm:mt-0 lg:col-span-5 lg:justify-end"
           >
-            <motion.div
-              className="w-full max-w-md lg:max-w-none"
-              initial={{ opacity: 0, x: 48 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="w-full max-w-md scale-95 sm:max-w-none sm:scale-100">
-                <InfiniteTerminal />
-              </div>
-            </motion.div>
+            <div className="w-full max-w-md scale-[0.98] sm:max-w-none sm:scale-100 lg:max-w-none">
+              <InfiniteTerminal />
+            </div>
           </motion.div>
         </div>
 
@@ -307,7 +296,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          className="mt-8 flex justify-center pb-2 sm:mt-10"
+          className="mt-auto flex justify-center pb-3 pt-6 sm:mt-10 sm:pb-2 sm:pt-0"
         >
           <a
             href="#about"

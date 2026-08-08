@@ -32,11 +32,11 @@ export default function CallToAction({ onCopyEmail }: Props) {
   return (
     <section
       id="engage"
-      className="snap-section relative isolate flex h-[100svh] flex-col justify-center overflow-hidden border-b border-white/10 bg-void"
+      className="snap-section relative isolate flex flex-col justify-center border-b border-white/10 bg-void"
     >
       <LivingBackground variant="hero" />
       <div
-        className="pointer-events-none absolute inset-0 z-[1]"
+        className="pointer-events-none absolute inset-0 z-[1] hidden md:block"
         aria-hidden="true"
       >
         <Suspense fallback={null}>
@@ -47,6 +47,10 @@ export default function CallToAction({ onCopyEmail }: Props) {
         </Suspense>
         <div className="absolute inset-0 bg-gradient-to-b from-void/40 via-transparent to-void/85" />
       </div>
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-void/40 via-transparent to-void/85 md:hidden"
+        aria-hidden="true"
+      />
 
       <div className="section-frame z-[2]" aria-hidden="true">
         <span className="section-frame__corner tl" />

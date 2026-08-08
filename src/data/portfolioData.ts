@@ -142,8 +142,8 @@ export const ABOUT = {
   kicker: "01 · About",
   title: "A bit about me",
   body: [
-    "Hey, I'm Alen. I like building things people can actually click, use, and trust. Some days that is a clean landing page. Other days it is a full app, a CRM flow, or even a little ESP32 box talking to the cloud.",
-    "I work as a web developer, and on the side I take on projects that need both design sense and real code. I am easy to talk to, quick to reply, and happiest when the work ships.",
+    "Hey, I'm Alen. I like building things people can actually click, use, and trust. Some days that is a clean landing page. Other days it is a full app, a CRM flow, or even a little ESP32 box talking to the\u00A0cloud.",
+    "I work as a web developer, and on the side I take on projects that need both design sense and real code. I am easy to talk to, quick to reply, and happiest when the work\u00A0ships.",
   ],
   image: "/projects/about/portrait.jpg",
   imageLabel: "Photo coming soon",
@@ -157,8 +157,8 @@ export const ABOUT = {
 export const CTA: CtaContent = {
   badge: "Let's talk",
   headline: "Let's work together",
-  headlineMute: "Real systems. Real constraints.",
-  body: "I help teams ship full stack builds, clean UI, and the messy middle between low code platforms and custom code. Currently a web developer by day. Open to freelance and remote collabs. I reply fast.",
+  headlineMute: "Real systems. Real\u00A0constraints.",
+  body: "I help teams ship full stack builds, clean UI, and the messy middle between low code platforms and custom code. Currently a web developer by day. Open to freelance and remote collabs. I reply\u00A0fast.",
   primaryLabel: "Email me",
   secondaryLabel: "Copy email",
   copiedLabel: "Copied",
@@ -191,12 +191,11 @@ export const EXPERIENCE: ExperienceItem[] = [
 
 export const HERO_LINES: readonly string[] = [
   "$ whoami",
-  "hey, i'm alen",
   "full stack + ui/ux · philippines",
   "$ day_job",
   "web developer · shipping live work",
-  "$ after_hours",
-  "pc tuning · audio gear · side builds",
+  "$ also_into",
+  "pc builds · audio gear · side builds",
   `$ status · open for collabs`,
 ];
 

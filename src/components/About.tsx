@@ -14,7 +14,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="snap-section relative isolate flex h-[100svh] flex-col justify-center overflow-hidden border-b border-white/10"
+      className="snap-section relative isolate flex flex-col justify-center border-b border-white/10"
     >
       <LivingBackground variant="slate" />
 
@@ -27,7 +27,7 @@ export default function About() {
       <motion.span
         className="giant-index right-0 top-16 z-[1] opacity-30"
         aria-hidden="true"
-        initial={{ opacity: 0, x: 40 }}
+        initial={{ opacity: 0, x: 16 }}
         whileInView={{ opacity: 0.3, x: 0 }}
         viewport={viewportOnce}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}

@@ -17,6 +17,7 @@ export default function ParticleScene({
     if (!window.WebGLRenderingContext) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
     const mount = mountRef.current;
     if (!mount) return;
 
@@ -25,8 +26,10 @@ export default function ParticleScene({
     let active = true;
     let running = false;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
+    renderer.setPixelRatio(
+      Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.5),
+    );
     renderer.setSize(width, height, false);
     renderer.domElement.style.display = "block";
     renderer.domElement.style.position = "absolute";
@@ -39,7 +42,7 @@ export default function ParticleScene({
     const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 200);
     camera.position.z = 9;
 
-    const COUNT = reduce ? 900 : 2200;
+    const COUNT = reduce ? 500 : mobile ? 900 : 1400;
     const positions = new Float32Array(COUNT * 3);
     const colors = new Float32Array(COUNT * 3);
     const gold = new THREE.Color(accent);
@@ -60,10 +63,10 @@ export default function ParticleScene({
     geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.034,
+      size: mobile ? 0.04 : 0.034,
       vertexColors: true,
       transparent: true,
-      opacity: 0.72,
+      opacity: mobile ? 0.65 : 0.72,
       sizeAttenuation: true,
       depthWrite: false,
     });
@@ -74,7 +77,7 @@ export default function ParticleScene({
     let targetX = 0;
     let targetY = 0;
     const onMove = (e: MouseEvent) => {
-      if (!active) return;
+      if (!active || mobile) return;
       targetX = (e.clientX / window.innerWidth - 0.5) * 2;
       targetY = (e.clientY / window.innerHeight - 0.5) * 2;
     };
@@ -97,17 +100,21 @@ export default function ParticleScene({
 
     const clock = new THREE.Clock();
     let raf = 0;
+    const rotY = mobile ? 0.028 : 0.04;
+    const rotX = mobile ? 0.05 : 0.08;
 
     const tick = () => {
       if (!running) return;
       const t = clock.getElapsedTime();
-      points.rotation.y = t * 0.04;
-      points.rotation.x = Math.sin(t * 0.15) * 0.08;
-      points.position.x += (targetX * 0.35 - points.position.x) * 0.04;
-      points.position.y += (-targetY * 0.22 - points.position.y) * 0.04;
-      camera.position.x += (targetX * 0.18 - camera.position.x) * 0.04;
-      camera.position.y += (-targetY * 0.12 - camera.position.y) * 0.04;
-      camera.lookAt(0, 0, 0);
+      points.rotation.y = t * rotY;
+      points.rotation.x = Math.sin(t * 0.15) * rotX;
+      if (!mobile) {
+        points.position.x += (targetX * 0.35 - points.position.x) * 0.04;
+        points.position.y += (-targetY * 0.22 - points.position.y) * 0.04;
+        camera.position.x += (targetX * 0.18 - camera.position.x) * 0.04;
+        camera.position.y += (-targetY * 0.12 - camera.position.y) * 0.04;
+        camera.lookAt(0, 0, 0);
+      }
       renderer.render(scene, camera);
       raf = requestAnimationFrame(tick);
     };

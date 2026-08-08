@@ -83,7 +83,7 @@ export default function FooterTerminal({ toast }: Props) {
   return (
     <section
       id="contact"
-      className="snap-section relative isolate flex h-[100svh] flex-col justify-center overflow-hidden border-t border-white/10"
+      className="snap-section relative isolate flex flex-col justify-center border-t border-white/10"
     >
       <LivingBackground variant="void" />
 
@@ -96,7 +96,7 @@ export default function FooterTerminal({ toast }: Props) {
       <motion.span
         className="giant-index bottom-8 right-0 z-[1] opacity-20"
         aria-hidden="true"
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 0.2, y: 0 }}
         viewport={viewportOnce}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -136,8 +136,8 @@ export default function FooterTerminal({ toast }: Props) {
               className="mx-auto max-w-md text-pretty font-mono text-[12px] leading-relaxed text-mute sm:text-[13px] lg:mx-0"
             >
               Send a short note with your name, email, and what you need help
-              with. I usually reply within a day. Prefer a quick chat? Discord
-              is open.
+              with. I usually reply within a&nbsp;day. Prefer a quick chat?
+              Discord is&nbsp;open.
             </motion.p>
 
             <motion.a

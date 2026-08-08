@@ -159,7 +159,7 @@ export default function GalleryRows() {
   return (
     <section
       id="gallery"
-      className="snap-section relative isolate flex h-[100svh] flex-col justify-center overflow-hidden border-b border-white/10"
+      className="snap-section relative isolate flex flex-col justify-center border-b border-white/10"
     >
       <LivingBackground variant="slate" />
 

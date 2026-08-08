@@ -19,7 +19,7 @@ export default function CapabilitiesTable() {
   return (
     <section
       id="specs"
-      className="snap-section relative isolate flex h-[100svh] flex-col justify-center overflow-hidden border-b border-white/10"
+      className="snap-section relative isolate flex flex-col justify-center border-b border-white/10"
     >
       <LivingBackground variant="carbon" />
 
@@ -32,7 +32,7 @@ export default function CapabilitiesTable() {
       <motion.span
         className="giant-index left-0 top-1/2 z-[1] -translate-y-1/2 opacity-25"
         aria-hidden="true"
-        initial={{ opacity: 0, x: -40 }}
+        initial={{ opacity: 0, x: -16 }}
         whileInView={{ opacity: 0.25, x: 0 }}
         viewport={viewportOnce}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}

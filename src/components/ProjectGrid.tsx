@@ -25,7 +25,7 @@ export default function ProjectGrid({ onOpen }: Props) {
   return (
     <section
       id="work"
-      className="snap-section relative isolate flex h-[100svh] flex-col justify-center overflow-hidden border-b border-white/10"
+      className="snap-section relative isolate flex flex-col justify-center border-b border-white/10"
     >
       <LivingBackground variant="black" />
 
@@ -38,7 +38,7 @@ export default function ProjectGrid({ onOpen }: Props) {
       <motion.span
         className="giant-index right-[-2vw] top-12 z-[1] opacity-40"
         aria-hidden="true"
-        initial={{ opacity: 0, x: 60 }}
+        initial={{ opacity: 0, x: 16 }}
         whileInView={{ opacity: 0.4, x: 0 }}
         viewport={viewportOnce}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -83,7 +83,6 @@ export default function ProjectGrid({ onOpen }: Props) {
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          style={{ perspective: 1200 }}
         >
           {PROJECTS.map((project, i) => (
             <motion.button
