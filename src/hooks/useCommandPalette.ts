@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { COMMANDS, type CommandItem } from "../data/portfolioData";
+import { openInNewTab } from "../lib/links";
 
 interface Options {
   onNavigate: (id: string) => void;
@@ -66,7 +67,7 @@ export function useCommandPalette({
       if (item.action === "project") onOpenProject(item.payload);
       if (item.action === "copy-email") onCopyEmail(item.payload);
       if (item.action === "external" && item.payload) {
-        window.open(item.payload, "_blank", "noopener,noreferrer");
+        openInNewTab(item.payload);
       }
       close();
     },

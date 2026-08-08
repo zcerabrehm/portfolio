@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, MessageCircle, Terminal } from "lucide-react";
 import { SITE } from "../data/portfolioData";
+import { mailHref, openInNewTab } from "../lib/links";
 import { fadeUp } from "../lib/motion";
 import LivingBackground from "./LivingBackground";
 
@@ -255,10 +256,14 @@ export default function Hero() {
               className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-6 lg:justify-start"
             >
               <a
-                href={`mailto:${SITE.email}?subject=${encodeURIComponent("Hello from alenguiwan.dev")}`}
+                href={mailHref(SITE.email, "Hello from alenguiwan.dev")}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="hello"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(mailHref(SITE.email, "Hello from alenguiwan.dev"));
+                }}
                 className="group inline-flex items-center gap-2 rounded-full border border-signal bg-signal px-5 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-label text-void transition-[transform,box-shadow] duration-200 ease-out-expo hover:-translate-y-0.5 hover:shadow-signal"
               >
                 Say Hello
@@ -272,6 +277,10 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="discord"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(SITE.discord.href);
+                }}
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-5 py-2.5 font-mono text-[11px] uppercase tracking-label text-fog backdrop-blur-md transition-[border-color,color,transform] duration-200 ease-out-expo hover:-translate-y-0.5 hover:border-signal/50 hover:text-chalk"
               >
                 <MessageCircle size={14} className="text-signal" />

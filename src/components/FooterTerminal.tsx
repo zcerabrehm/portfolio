@@ -8,6 +8,7 @@ import {
   viewportOnce,
 } from "../lib/motion";
 import LivingBackground from "./LivingBackground";
+import { openInNewTab } from "../lib/links";
 import { playUiTick } from "../lib/uiSound";
 
 interface Props {
@@ -146,6 +147,10 @@ export default function FooterTerminal({ toast }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="discord"
+              onClick={(e) => {
+                e.preventDefault();
+                openInNewTab(SITE.discord.href);
+              }}
               className="group mx-auto mt-6 flex w-full max-w-md items-center justify-between gap-4 border border-signal/50 bg-signal/15 px-4 py-4 shadow-signal transition-colors hover:border-signal hover:bg-signal hover:text-void lg:mx-0"
             >
               <span className="flex items-center gap-3">

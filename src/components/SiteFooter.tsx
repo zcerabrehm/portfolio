@@ -1,5 +1,6 @@
 import { ArrowUp, ArrowUpRight, Mail, MessageCircle } from "lucide-react";
 import { NAV_LINKS, SITE } from "../data/portfolioData";
+import { mailHref, openInNewTab } from "../lib/links";
 
 const MARQUEE = [
   "FULL STACK",
@@ -75,10 +76,16 @@ export default function SiteFooter() {
 
           <div className="flex flex-col items-center gap-3 lg:items-end">
             <a
-              href={`mailto:${SITE.email}?subject=${encodeURIComponent("Project inquiry from alenguiwan.dev")}`}
+              href={mailHref(SITE.email, "Project inquiry from alenguiwan.dev")}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="hello"
+              onClick={(e) => {
+                e.preventDefault();
+                openInNewTab(
+                  mailHref(SITE.email, "Project inquiry from alenguiwan.dev"),
+                );
+              }}
               className="group inline-flex items-center gap-3 rounded-full border border-signal bg-signal px-6 py-3.5 font-mono text-[11px] font-semibold uppercase tracking-label text-void transition-shadow hover:shadow-signal"
             >
               <Mail size={14} />
@@ -127,10 +134,14 @@ export default function SiteFooter() {
             </div>
             <div className="space-y-2">
               <a
-                href={`mailto:${SITE.email}`}
+                href={mailHref(SITE.email)}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="copy"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(mailHref(SITE.email));
+                }}
                 className="group flex items-center justify-between border border-white/10 bg-black/40 px-4 py-3.5 transition-colors hover:border-signal/45 hover:bg-signal/10"
               >
                 <div>
@@ -148,6 +159,10 @@ export default function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="discord"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(SITE.discord.href);
+                }}
                 className="group flex items-center justify-between border border-signal/40 bg-signal/10 px-4 py-3.5 transition-colors hover:border-signal hover:bg-signal hover:text-void"
               >
                 <div className="flex items-center gap-2">

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Check, Copy, Mail } from "lucide-react";
 import { CTA, SITE } from "../data/portfolioData";
 import { useMagnetic } from "../hooks/useMagnetic";
+import { mailHref, openInNewTab } from "../lib/links";
 import { playUiTick } from "../lib/uiSound";
 import {
   staggerContainer,
@@ -111,13 +112,17 @@ export default function CallToAction({ onCopyEmail }: Props) {
               className="flex w-full max-w-md flex-col gap-3"
             >
               <motion.a
-                href={`mailto:${SITE.email}?subject=${encodeURIComponent(CTA.mailSubject)}`}
+                href={mailHref(SITE.email, CTA.mailSubject)}
                 target="_blank"
                 rel="noopener noreferrer"
                 ref={primaryRef}
                 data-magnetic
                 data-cursor="engage"
-                onClick={() => playUiTick("tap")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  playUiTick("tap");
+                  openInNewTab(mailHref(SITE.email, CTA.mailSubject));
+                }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="group inline-flex items-center justify-between gap-3 rounded-full border border-signal bg-signal px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-label text-void transition-shadow duration-300 hover:shadow-signal"

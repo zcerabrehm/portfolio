@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import type { Project } from "../data/portfolioData";
+import { openInNewTab } from "../lib/links";
 
 interface Props {
   project: Project | null;
@@ -332,6 +333,10 @@ export default function ProjectModal({ project, onClose }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor="open"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openInNewTab(link.href);
+                    }}
                     className="inline-flex items-center gap-2 rounded-full border border-signal bg-signal px-4 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-label text-void transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
                   >
                     <ExternalLink size={14} />
