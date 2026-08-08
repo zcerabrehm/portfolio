@@ -42,14 +42,14 @@ export default function CapabilitiesTable() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-24">
         <motion.div
-          className="mb-6 flex flex-wrap items-end justify-between gap-4"
+          className="mb-6 flex flex-col items-center gap-4 text-center md:flex-row md:items-end md:justify-between md:text-left"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
         >
           <motion.div variants={staggerItem}>
-            <p className="section-kicker">
+            <p className="section-kicker justify-center md:justify-start">
               <span className="signal-dot" />
               03 · Skills
             </p>

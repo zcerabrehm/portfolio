@@ -112,8 +112,11 @@ export default function FooterTerminal({ toast }: Props) {
           viewport={viewportOnce}
           className="grid items-start gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12"
         >
-          <div className="lg:col-span-5">
-            <motion.p variants={staggerItem} className="section-kicker">
+          <div className="text-center lg:col-span-5 lg:text-left">
+            <motion.p
+              variants={staggerItem}
+              className="section-kicker justify-center lg:justify-start"
+            >
               <span className="signal-dot" />
               05 · Contact
             </motion.p>
@@ -130,7 +133,7 @@ export default function FooterTerminal({ toast }: Props) {
             </motion.h2>
             <motion.p
               variants={staggerItem}
-              className="max-w-md font-mono text-[12px] leading-relaxed text-mute sm:text-[13px]"
+              className="mx-auto max-w-md font-mono text-[12px] leading-relaxed text-mute sm:text-[13px] lg:mx-0"
             >
               Send a short note with your name, email, and what you need help
               with. I usually reply within a day. Prefer a quick chat? Discord
@@ -143,7 +146,7 @@ export default function FooterTerminal({ toast }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="discord"
-              className="group mt-6 flex w-full max-w-md items-center justify-between gap-4 border border-signal/50 bg-signal/15 px-4 py-4 shadow-signal transition-colors hover:border-signal hover:bg-signal hover:text-void"
+              className="group mx-auto mt-6 flex w-full max-w-md items-center justify-between gap-4 border border-signal/50 bg-signal/15 px-4 py-4 shadow-signal transition-colors hover:border-signal hover:bg-signal hover:text-void lg:mx-0"
             >
               <span className="flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full border border-signal/40 bg-black/30 text-signal transition-colors group-hover:border-void/20 group-hover:bg-void/10 group-hover:text-void">
@@ -166,7 +169,7 @@ export default function FooterTerminal({ toast }: Props) {
 
             <motion.div
               variants={staggerItem}
-              className="mt-4 flex flex-wrap gap-2"
+              className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start"
             >
               <span className="inline-flex items-center gap-2 border border-white/10 px-3 py-2 font-mono text-[10px] uppercase tracking-label text-mute">
                 <span className="signal-dot" />

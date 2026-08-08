@@ -48,14 +48,14 @@ export default function ProjectGrid({ onOpen }: Props) {
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-14 sm:px-6 sm:py-20 md:py-24">
         <motion.div
-          className="mb-6 flex flex-wrap items-end justify-between gap-4 sm:mb-8"
+          className="mb-6 flex flex-col items-center gap-4 text-center sm:mb-8 md:flex-row md:items-end md:justify-between md:text-left"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
         >
           <motion.div variants={staggerItem}>
-            <p className="section-kicker">
+            <p className="section-kicker justify-center md:justify-start">
               <span className="signal-dot" />
               02 · Work
             </p>

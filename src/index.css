@@ -114,16 +114,17 @@
     scroll-snap-stop: always;
   }
 
-  /* Mobile: freer scroll, sections can grow so content isn't clipped */
+  /* Mobile: normal free scroll — no snap sections */
   @media (max-width: 767px) {
     html {
-      scroll-snap-type: y proximity;
+      scroll-snap-type: none;
     }
 
     .snap-section {
+      scroll-snap-align: none;
       scroll-snap-stop: normal;
       height: auto;
-      min-height: 100svh;
+      min-height: 0;
       max-height: none;
       overflow: visible;
       padding-top: 4.25rem;
@@ -131,6 +132,7 @@
     }
 
     .site-footer {
+      scroll-snap-align: none;
       scroll-snap-stop: normal;
     }
 
@@ -372,6 +374,12 @@
 
   .section-kicker {
     @apply label mb-4 flex items-center gap-2;
+  }
+
+  @media (max-width: 767px) {
+    .section-kicker {
+      justify-content: center;
+    }
   }
 
   .hud-divider {

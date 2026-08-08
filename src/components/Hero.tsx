@@ -198,7 +198,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 py-6 sm:px-6 sm:py-8">
         <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-7">
+          <div className="text-center lg:col-span-7 lg:text-left">
             <motion.p
               custom={0}
               variants={fadeUp}
@@ -244,7 +244,7 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="show"
-              className="mt-4 max-w-md font-mono text-[12px] leading-relaxed text-mute sm:mt-5 sm:text-[13px]"
+              className="mx-auto mt-4 max-w-md font-mono text-[12px] leading-relaxed text-mute sm:mt-5 sm:text-[13px] lg:mx-0"
             >
               Hi, I&apos;m Alen. I design and build web stuff people actually
               use, from clean interfaces to the backend that keeps them running.
@@ -256,7 +256,7 @@ export default function Hero() {
               variants={fadeUp}
               initial="hidden"
               animate="show"
-              className="mt-5 flex flex-wrap items-center gap-3 sm:mt-6"
+              className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-6 lg:justify-start"
             >
               <a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent("Hello from alenguiwan.dev")}`}

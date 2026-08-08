@@ -48,7 +48,7 @@ export default function SiteFooter() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
-        <div className="mb-8 flex flex-col gap-6 border-b border-white/10 pb-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-8 flex flex-col items-center gap-6 border-b border-white/10 pb-8 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
           <div className="max-w-3xl">
             <p className="mb-3 font-mono text-[10px] uppercase tracking-label text-signal">
               Thanks for stopping by
@@ -68,12 +68,12 @@ export default function SiteFooter() {
             <p className="mt-3 font-mono text-[11px] uppercase tracking-label text-mute">
               {FOOTER_MOTTO.sub}
             </p>
-            <p className="mt-3 max-w-md font-mono text-[12px] leading-relaxed text-mute">
+            <p className="mx-auto mt-3 max-w-md font-mono text-[12px] leading-relaxed text-mute lg:mx-0">
               {SITE.role}. Open for remote work and side projects.
             </p>
           </div>
 
-          <div className="flex flex-col items-start gap-3 lg:items-end">
+          <div className="flex flex-col items-center gap-3 lg:items-end">
             <a
               href={`mailto:${SITE.email}?subject=${encodeURIComponent("Project inquiry from alenguiwan.dev")}`}
               data-cursor="hello"

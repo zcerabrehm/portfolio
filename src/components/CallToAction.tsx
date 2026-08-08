@@ -73,7 +73,7 @@ export default function CallToAction({ onCopyEmail }: Props) {
           viewport={viewportOnce}
           className="overflow-hidden border border-white/10 bg-black/35 p-6 shadow-panel backdrop-blur-md sm:p-10 md:p-14"
         >
-          <div className="flex flex-col items-center gap-10 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
+          <div className="flex flex-col items-center gap-10 text-center md:flex-row md:items-end md:justify-between md:text-left">
             <div className="max-w-2xl">
               <motion.p
                 variants={staggerItem}
@@ -92,7 +92,7 @@ export default function CallToAction({ onCopyEmail }: Props) {
                   </span>
                   <span className="display-stack__solid">{CTA.headline}</span>
                 </span>
-                <span className="mt-3 block max-w-xl text-[0.42em] font-semibold leading-snug tracking-tight text-mute sm:text-[0.38em]">
+                <span className="mx-auto mt-3 block max-w-xl text-[0.42em] font-semibold leading-snug tracking-tight text-mute sm:text-[0.38em] md:mx-0">
                   <span className="whitespace-nowrap">Real systems.</span>{" "}
                   <span className="whitespace-nowrap">Real constraints.</span>
                 </span>
@@ -100,7 +100,7 @@ export default function CallToAction({ onCopyEmail }: Props) {
 
               <motion.p
                 variants={staggerItem}
-                className="mt-5 max-w-lg text-sm leading-relaxed text-mute/90 sm:text-[15px]"
+                className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-mute/90 sm:text-[15px] md:mx-0"
               >
                 {CTA.body}
               </motion.p>
@@ -108,7 +108,7 @@ export default function CallToAction({ onCopyEmail }: Props) {
 
             <motion.div
               variants={staggerItem}
-              className="flex w-full max-w-md flex-col gap-3 lg:items-stretch"
+              className="flex w-full max-w-md flex-col gap-3"
             >
               <motion.a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent(CTA.mailSubject)}`}
