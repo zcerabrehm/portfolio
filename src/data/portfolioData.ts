@@ -89,7 +89,7 @@ export interface SiteMeta {
   version: string;
   discord: { label: string; href: string; handle: string };
   github: { label: string; href: string; handle: string };
-  socials: { label: string; href: string }[];
+  socials: { label: string; href: string; handle: string }[];
 }
 
 export interface CtaContent {
@@ -124,10 +124,16 @@ export const SITE: SiteMeta = {
   },
   github: {
     label: "GitHub",
-    href: "https://github.com/JT-028/GENTA",
-    handle: "JT-028/GENTA",
+    href: "https://github.com/zcerabrehm",
+    handle: "zcerabrehm",
   },
-  socials: [],
+  socials: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/alen-guiwan/",
+      handle: "alen-guiwan",
+    },
+  ],
 };
 
 export const NAV_LINKS: NavLink[] = [
@@ -158,7 +164,7 @@ export const CTA: CtaContent = {
   badge: "Let's talk",
   headline: "Let's work together",
   headlineMute: "Real systems. Real\u00A0constraints.",
-  body: "I help teams ship full stack builds, clean UI, and the messy middle between low code platforms and custom code. Currently a web developer by day. Open to freelance and remote collabs. I reply\u00A0fast.",
+  body: "I help teams ship full stack builds, clean UI, and the messy middle between low code platforms and custom code. Full-time web developer (PH evenings, 5pm\u20132am). Open to freelance and remote collabs. I reply\u00A0fast.",
   primaryLabel: "Email me",
   secondaryLabel: "Copy email",
   copiedLabel: "Copied",
@@ -176,30 +182,28 @@ export const EXPERIENCE: ExperienceItem[] = [
     org: "Web developer",
     role: "Full time",
     period: "Current",
-    detail:
-      "Day job building and shipping web products. I move between low code platforms and custom stacks depending on what the project actually needs.",
+    detail: "5pm–2am PH · live products",
   },
   {
     id: "freelance-past",
-    org: "Freelance & client work",
-    role: "Landing pages & CRM",
+    org: "Freelance & clients",
+    role: "Sites & CRM",
     period: "Ongoing",
-    detail:
-      "Marketing sites, automation funnels, and CRM wiring on tools like GoHighLevel and WordPress when campaigns need clean capture and follow up.",
+    detail: "GHL · WordPress · funnels",
   },
 ];
 
 export const HERO_LINES: readonly string[] = [
   "$ whoami",
   "full stack + ui/ux · philippines",
-  "$ day_job",
-  "web developer · shipping live work",
+  "$ full_time",
+  "web developer · 5pm–2am ph",
   "$ also_into",
   "pc builds · audio gear · side builds",
   `$ status · open for collabs`,
 ];
 
-/** Lifestyle gallery: things I enjoy outside (and around) the day job */
+/** Lifestyle gallery: things I enjoy outside (and around) full-time work */
 export const GALLERY_ROW_A: GalleryCard[] = [
   {
     id: "g1",
@@ -309,61 +313,51 @@ export const SPEC_ROWS: SpecRow[] = [
     id: "s01",
     index: "01",
     domain: "FULL CODE",
-    capability: "Custom web architectures",
-    stack: "React · Vue · Node · Laravel · CakePHP · PHP",
+    capability: "Custom web apps",
+    stack: "React · Vue · Node · Laravel · CakePHP",
     maturity: "PROD",
-    throughput: "Production",
-    notes: "Custom apps when a template will not cut it. Auth, data models, APIs, and UI that stay maintainable.",
+    throughput: "Prod",
+    notes: "Auth · APIs · data models",
   },
   {
     id: "s02",
     index: "02",
     domain: "LOW CODE",
-    capability: "Rapid platform delivery",
-    stack: "WordPress · Wix · Shopify · GoHighLevel",
+    capability: "Fast platform ship",
+    stack: "WordPress · Shopify · GoHighLevel · Wix",
     maturity: "PROD",
-    throughput: "Fast ship",
-    notes: "Launch marketing sites, stores, and CRM funnels quickly, then harden the parts that need real code.",
+    throughput: "Fast",
+    notes: "Sites · stores · CRM",
   },
   {
     id: "s03",
     index: "03",
     domain: "BRIDGE",
-    capability: "Low code meets full code",
-    stack: "GHL · WP · Vue · Laravel · CakePHP",
+    capability: "Hybrid systems",
+    stack: "GHL · WP · Vue · Laravel",
     maturity: "PROD",
     throughput: "Hybrid",
-    notes: "Pair platform speed with custom systems that scale when a template hits its ceiling.",
+    notes: "Platform + custom code",
   },
   {
     id: "s04",
     index: "04",
-    domain: "HARDWARE",
-    capability: "ESP32 and Arduino builds",
-    stack: "ESP32 · Arduino · GCP · Audio I/O",
+    domain: "CRM · FUNNELS",
+    capability: "Leads & automation",
+    stack: "GoHighLevel · WordPress · email flows",
     maturity: "PROD",
-    throughput: "Device ready",
-    notes: "Physical products that talk to the cloud. Mic layouts, manuals, and firmware paths that students can use.",
+    throughput: "Convert",
+    notes: "Capture · nurture · close",
   },
   {
     id: "s05",
     index: "05",
-    domain: "VOICE + AI",
-    capability: "Speech in, model, speech out",
-    stack: "STT · Gemini 2.5 Flash · TTS · GCP",
-    maturity: "PROD",
-    throughput: "Live loop",
-    notes: "Classroom grade voice loops: capture, transcribe, reason, speak back on hardware without losing the thread.",
-  },
-  {
-    id: "s06",
-    index: "06",
     domain: "UI/UX",
-    capability: "Product design and interface",
-    stack: "Figma minded process · React · Tailwind",
+    capability: "UI/UX",
+    stack: "React · Tailwind · design systems",
     maturity: "PROD",
-    throughput: "Clear",
-    notes: "Design and ship in the same motion. Teacher panels, landing pages, and product screens that stay readable.",
+    throughput: "Ship",
+    notes: "Design + build together",
   },
 ];
 
@@ -423,7 +417,10 @@ export const PROJECTS: Project[] = [
     images: [
       "/projects/genta/dashboard.png",
       "/projects/genta/student-assessment.png",
+      "/projects/genta/GENTA_product.png",
       "/projects/genta/logo-mascot.png",
+      "/projects/genta/GENTA MANUAL - F2 -L.png",
+      "/projects/genta/GENTA MANUAL - F2 -R.png",
     ],
     posterLabel: "01 · GENTA",
     links: [{ label: "GitHub", href: "https://github.com/JT-028/GENTA" }],
@@ -513,5 +510,23 @@ export const COMMANDS: CommandItem[] = [
     keywords: ["discord", "chat"],
     action: "external",
     payload: SITE.discord.href,
+  },
+  {
+    id: "act-github",
+    group: "action",
+    label: "Open GitHub",
+    hint: SITE.github.handle,
+    keywords: ["github", "code", "repos"],
+    action: "external",
+    payload: SITE.github.href,
+  },
+  {
+    id: "act-linkedin",
+    group: "action",
+    label: "Open LinkedIn",
+    hint: SITE.socials[0].handle,
+    keywords: ["linkedin", "social", "profile"],
+    action: "external",
+    payload: SITE.socials[0].href,
   },
 ];

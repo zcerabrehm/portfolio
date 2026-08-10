@@ -131,6 +131,14 @@
     overflow: hidden;
   }
 
+  /* Tall content: still snaps to section start, but can grow past one fold */
+  .snap-section--flow {
+    height: auto;
+    min-height: 100svh;
+    max-height: none;
+    overflow: visible;
+  }
+
   /* Footer snaps as its own surface after Contact */
   .site-footer {
     scroll-snap-align: start;

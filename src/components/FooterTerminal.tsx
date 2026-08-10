@@ -1,6 +1,13 @@
 import { type FormEvent, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Loader2, MessageCircle, Send } from "lucide-react";
+import {
+  ExternalLink,
+  FolderGit2,
+  Link2,
+  Loader2,
+  MessageCircle,
+  Send,
+} from "lucide-react";
 import { SITE } from "../data/portfolioData";
 import {
   staggerContainer,
@@ -137,40 +144,107 @@ export default function FooterTerminal({ toast }: Props) {
               className="mx-auto max-w-md text-pretty font-mono text-[12px] leading-relaxed text-mute sm:text-[13px] lg:mx-0"
             >
               Send a short note with your name, email, and what you need help
-              with. I usually reply within a&nbsp;day. Prefer a quick chat?
-              Discord is&nbsp;open.
+              with. I usually reply within a&nbsp;day. Full-time hours are
+              5pm–2am&nbsp;PH — Discord, GitHub, and LinkedIn are&nbsp;open too.
             </motion.p>
 
-            <motion.a
+            <motion.div
               variants={staggerItem}
-              href={SITE.discord.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="discord"
-              onClick={(e) => {
-                e.preventDefault();
-                openInNewTab(SITE.discord.href);
-              }}
-              className="group mx-auto mt-6 flex w-full max-w-md items-center justify-between gap-4 border border-signal/50 bg-signal/15 px-4 py-4 shadow-signal transition-colors hover:border-signal hover:bg-signal hover:text-void lg:mx-0"
+              className="mx-auto mt-6 flex w-full max-w-md flex-col gap-2 lg:mx-0"
             >
-              <span className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-signal/40 bg-black/30 text-signal transition-colors group-hover:border-void/20 group-hover:bg-void/10 group-hover:text-void">
-                  <MessageCircle size={18} />
-                </span>
-                <span>
-                  <span className="block font-mono text-[10px] uppercase tracking-label text-signal transition-colors group-hover:text-void/70">
-                    Quick chat
+              <a
+                href={SITE.discord.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="discord"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(SITE.discord.href);
+                }}
+                className="group flex w-full items-center justify-between gap-4 border border-signal/50 bg-signal/15 px-4 py-4 shadow-signal transition-colors hover:border-signal hover:bg-signal hover:text-void"
+              >
+                <span className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-signal/40 bg-black/30 text-signal transition-colors group-hover:border-void/20 group-hover:bg-void/10 group-hover:text-void">
+                    <MessageCircle size={18} />
                   </span>
-                  <span className="mt-0.5 block font-display text-lg font-bold tracking-tight text-chalk transition-colors group-hover:text-void">
-                    Discord · {SITE.discord.handle}
+                  <span>
+                    <span className="block font-mono text-[10px] uppercase tracking-label text-signal transition-colors group-hover:text-void/70">
+                      Quick chat
+                    </span>
+                    <span className="mt-0.5 block font-display text-lg font-bold tracking-tight text-chalk transition-colors group-hover:text-void">
+                      Discord · {SITE.discord.handle}
+                    </span>
                   </span>
                 </span>
-              </span>
-              <ExternalLink
-                size={16}
-                className="shrink-0 text-signal transition-colors group-hover:text-void"
-              />
-            </motion.a>
+                <ExternalLink
+                  size={16}
+                  className="shrink-0 text-signal transition-colors group-hover:text-void"
+                />
+              </a>
+
+              <a
+                href={SITE.github.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="github"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(SITE.github.href);
+                }}
+                className="group flex w-full items-center justify-between gap-4 border border-white/10 bg-black/40 px-4 py-3.5 transition-colors hover:border-signal/45 hover:bg-signal/10"
+              >
+                <span className="flex items-center gap-3">
+                  <span className="flex h-9 w-9 items-center justify-center border border-white/10 text-signal">
+                    <FolderGit2 size={16} />
+                  </span>
+                  <span>
+                    <span className="block font-mono text-[10px] uppercase tracking-label text-mute">
+                      Code
+                    </span>
+                    <span className="mt-0.5 block font-mono text-[13px] text-chalk transition-colors group-hover:text-signal">
+                      GitHub · {SITE.github.handle}
+                    </span>
+                  </span>
+                </span>
+                <ExternalLink
+                  size={14}
+                  className="shrink-0 text-mute transition-colors group-hover:text-signal"
+                />
+              </a>
+
+              {SITE.socials.map((social) => (
+                <a
+                  key={social.href}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="linkedin"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openInNewTab(social.href);
+                  }}
+                  className="group flex w-full items-center justify-between gap-4 border border-white/10 bg-black/40 px-4 py-3.5 transition-colors hover:border-signal/45 hover:bg-signal/10"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center border border-white/10 text-signal">
+                      <Link2 size={16} />
+                    </span>
+                    <span>
+                      <span className="block font-mono text-[10px] uppercase tracking-label text-mute">
+                        Profile
+                      </span>
+                      <span className="mt-0.5 block font-mono text-[13px] text-chalk transition-colors group-hover:text-signal">
+                        {social.label} · {social.handle}
+                      </span>
+                    </span>
+                  </span>
+                  <ExternalLink
+                    size={14}
+                    className="shrink-0 text-mute transition-colors group-hover:text-signal"
+                  />
+                </a>
+              ))}
+            </motion.div>
 
             <motion.div
               variants={staggerItem}
@@ -179,6 +253,9 @@ export default function FooterTerminal({ toast }: Props) {
               <span className="inline-flex items-center gap-2 border border-white/10 px-3 py-2 font-mono text-[10px] uppercase tracking-label text-mute">
                 <span className="signal-dot" />
                 {SITE.availability}
+              </span>
+              <span className="inline-flex items-center border border-white/10 px-3 py-2 font-mono text-[10px] uppercase tracking-label text-mute">
+                Hours · 5pm–2am PH
               </span>
               <span className="inline-flex items-center border border-white/10 px-3 py-2 font-mono text-[10px] uppercase tracking-label text-mute">
                 {SITE.location}

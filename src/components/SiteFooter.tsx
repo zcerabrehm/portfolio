@@ -1,4 +1,11 @@
-import { ArrowUp, ArrowUpRight, Mail, MessageCircle } from "lucide-react";
+import {
+  ArrowUp,
+  ArrowUpRight,
+  FolderGit2,
+  Link2,
+  Mail,
+  MessageCircle,
+} from "lucide-react";
 import { NAV_LINKS, SITE } from "../data/portfolioData";
 import { mailHref, openInNewTab } from "../lib/links";
 
@@ -184,6 +191,57 @@ export default function SiteFooter() {
                   className="text-signal transition-colors group-hover:text-void"
                 />
               </a>
+              <a
+                href={SITE.github.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="github"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(SITE.github.href);
+                }}
+                className="group flex items-center justify-between border border-white/10 bg-black/40 px-4 py-3.5 transition-colors hover:border-signal/45 hover:bg-signal/10"
+              >
+                <div className="flex items-center gap-2">
+                  <FolderGit2 size={14} className="text-signal" />
+                  <div>
+                    <p className="font-mono text-[9px] uppercase tracking-label text-mute">
+                      GitHub
+                    </p>
+                    <p className="mt-0.5 font-mono text-[12px] text-chalk transition-colors group-hover:text-signal">
+                      {SITE.github.handle}
+                    </p>
+                  </div>
+                </div>
+                <ArrowUpRight size={14} className="text-signal" />
+              </a>
+              {SITE.socials.map((social) => (
+                <a
+                  key={social.href}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="linkedin"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openInNewTab(social.href);
+                  }}
+                  className="group flex items-center justify-between border border-white/10 bg-black/40 px-4 py-3.5 transition-colors hover:border-signal/45 hover:bg-signal/10"
+                >
+                  <div className="flex items-center gap-2">
+                    <Link2 size={14} className="text-signal" />
+                    <div>
+                      <p className="font-mono text-[9px] uppercase tracking-label text-mute">
+                        {social.label}
+                      </p>
+                      <p className="mt-0.5 font-mono text-[12px] text-chalk transition-colors group-hover:text-signal">
+                        {social.handle}
+                      </p>
+                    </div>
+                  </div>
+                  <ArrowUpRight size={14} className="text-signal" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -195,12 +253,12 @@ export default function SiteFooter() {
                 <dd className="text-chalk">Within a day</dd>
               </div>
               <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <dt className="text-mute">Location</dt>
-                <dd className="text-chalk">Philippines</dd>
+                <dt className="text-mute">Hours</dt>
+                <dd className="text-chalk">5pm–2am PH</dd>
               </div>
               <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <dt className="text-mute">Timezone</dt>
-                <dd className="text-chalk">UTC+8</dd>
+                <dt className="text-mute">Location</dt>
+                <dd className="text-chalk">Philippines</dd>
               </div>
               <div className="flex items-center justify-between">
                 <dt className="text-mute">Focus</dt>

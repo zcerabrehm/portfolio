@@ -13,13 +13,33 @@ const maturityStyle: Record<string, string> = {
   "R&D": "border-white/10 bg-transparent text-mute",
 };
 
-const featured = SPEC_ROWS.slice(0, 6);
+const stackByCategory = {
+  runtime: STACK_ITEMS.filter((s) => s.category === "runtime"),
+  lowcode: STACK_ITEMS.filter((s) => s.category === "lowcode"),
+  hardware: STACK_ITEMS.filter((s) => s.category === "hardware"),
+};
+
+const categoryLabel: Record<keyof typeof stackByCategory, string> = {
+  runtime: "Full code",
+  lowcode: "Low code",
+  hardware: "Hardware",
+};
+
+const bentoSpan = [
+  "sm:col-span-2 lg:col-span-4 lg:row-span-2",
+  "lg:col-span-4",
+  "lg:col-span-4",
+  "lg:col-span-4",
+  "lg:col-span-4",
+];
 
 export default function CapabilitiesTable() {
+  const [lead, ...rest] = SPEC_ROWS;
+
   return (
     <section
       id="specs"
-      className="snap-section relative isolate flex flex-col justify-center border-b border-white/10"
+      className="snap-section snap-section--flow relative isolate flex flex-col justify-center border-b border-white/10"
     >
       <LivingBackground variant="carbon" />
 
@@ -30,30 +50,30 @@ export default function CapabilitiesTable() {
         <span className="section-frame__corner br" />
       </div>
       <motion.span
-        className="giant-index left-0 top-1/2 z-[1] -translate-y-1/2 opacity-25"
+        className="giant-index left-0 top-24 z-[1] opacity-20"
         aria-hidden="true"
         initial={{ opacity: 0, x: -16 }}
-        whileInView={{ opacity: 0.25, x: 0 }}
+        whileInView={{ opacity: 0.2, x: 0 }}
         viewport={viewportOnce}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
       >
         03
       </motion.span>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-24">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col justify-center px-4 py-14 sm:px-6 sm:py-16 md:py-18">
         <motion.div
-          className="mb-6 flex flex-col items-center gap-4 text-center md:flex-row md:items-end md:justify-between md:text-left"
+          className="mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-3 sm:mb-5"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
         >
-          <motion.div variants={staggerItem}>
-            <p className="section-kicker justify-center md:justify-start">
+          <motion.div variants={staggerItem} className="min-w-0">
+            <p className="section-kicker">
               <span className="signal-dot" />
               03 · Skills
             </p>
-            <h2 className="font-display text-[clamp(1.9rem,4.5vw,3.25rem)] font-bold tracking-tightest">
+            <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold tracking-tightest">
               <span className="display-stack">
                 <span className="display-stack__outline" aria-hidden="true">
                   What I do
@@ -62,107 +82,140 @@ export default function CapabilitiesTable() {
               </span>
             </h2>
           </motion.div>
-          <motion.p
+
+          <motion.div
             variants={staggerItem}
-            className="max-w-sm text-pretty font-mono text-[11px] leading-relaxed text-mute"
+            className="flex flex-wrap gap-1.5"
           >
-            Full code, low code, hardware, and UI. From React and Laravel to
-            GoHighLevel, WordPress, and ESP32.
-          </motion.p>
+            {EXPERIENCE.map((job) => (
+              <div
+                key={job.id}
+                className="inline-flex items-center gap-2 border border-white/10 bg-black/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-label backdrop-blur-sm"
+              >
+                <span className="text-signal">{job.period}</span>
+                <span className="text-mute">·</span>
+                <span className="text-chalk">{job.org}</span>
+                <span className="hidden text-mute sm:inline">· {job.detail}</span>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
         <motion.div
-          className="mb-4 grid gap-2 sm:grid-cols-2"
+          className="grid gap-2 sm:grid-cols-2 lg:grid-cols-12 lg:grid-rows-2"
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
         >
-          {EXPERIENCE.map((job) => (
+          {lead ? (
             <motion.article
-              key={job.id}
               variants={staggerItem}
-              className="border border-white/10 bg-black/35 p-4 text-left backdrop-blur-md"
+              whileHover={{ y: -2, borderColor: "rgba(204,255,0,0.35)" }}
+              className={`group relative flex flex-col justify-between overflow-hidden border border-signal/30 bg-gradient-to-br from-signal/12 via-black/50 to-black/70 p-4 text-left backdrop-blur-md sm:p-5 ${bentoSpan[0]}`}
             >
-              <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                <p className="font-mono text-[10px] uppercase tracking-label text-signal">
-                  {job.period}
+              <div>
+                <div className="mb-4 flex items-center justify-between gap-2">
+                  <span className="font-mono text-[10px] text-signal">
+                    {lead.index}
+                  </span>
+                  <span
+                    className={`rounded-full border px-2 py-0.5 font-mono text-[9px] uppercase tracking-label ${maturityStyle[lead.maturity]}`}
+                  >
+                    {lead.maturity}
+                  </span>
+                </div>
+                <p className="mb-1 font-mono text-[9px] uppercase tracking-label text-mute">
+                  {lead.domain}
                 </p>
-                <p className="font-mono text-[10px] uppercase tracking-label text-mute">
-                  {job.role}
+                <h3 className="font-display text-2xl font-bold tracking-tight text-chalk sm:text-[1.75rem]">
+                  {lead.capability}
+                </h3>
+                <p className="mt-2 font-mono text-[11px] text-fog">
+                  {lead.notes}
                 </p>
               </div>
-              <h3 className="font-display text-base font-semibold text-chalk">
-                {job.org}
-              </h3>
-              <p className="mt-2 text-pretty text-left text-xs leading-relaxed text-mute">
-                {job.detail}
-              </p>
+              <div className="mt-5 flex flex-wrap gap-1.5 border-t border-white/10 pt-3">
+                {lead.stack.split(" · ").map((tech) => (
+                  <span
+                    key={tech}
+                    className="border border-white/10 bg-black/30 px-2 py-1 font-mono text-[9px] uppercase tracking-label text-fog"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full border border-signal/15" />
             </motion.article>
-          ))}
-        </motion.div>
+          ) : null}
 
-        <motion.div
-          className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-        >
-          {featured.map((row, i) => (
+          {rest.map((row, i) => (
             <motion.article
               key={row.id}
               variants={staggerItem}
-              custom={i}
-              whileHover={{ y: -4, borderColor: "rgba(204,255,0,0.35)" }}
-              className="group relative overflow-hidden border border-white/10 bg-black/40 p-4 text-left backdrop-blur-md transition-colors sm:p-5"
+              whileHover={{ y: -2, borderColor: "rgba(204,255,0,0.35)" }}
+              className={`group relative flex min-h-[118px] flex-col justify-between overflow-hidden border border-white/10 bg-black/40 p-3.5 text-left backdrop-blur-md transition-colors sm:p-4 ${bentoSpan[i + 1] ?? "lg:col-span-4"}`}
             >
-              <div className="mb-3 flex items-start justify-between gap-2">
-                <span className="font-mono text-[10px] text-signal">
-                  {row.index}
-                </span>
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <p className="mb-1 font-mono text-[9px] uppercase tracking-label text-mute">
+                    {row.domain}
+                  </p>
+                  <h3 className="font-display text-lg font-semibold tracking-tight text-chalk">
+                    {row.capability}
+                  </h3>
+                </div>
                 <span
-                  className={`rounded-full border px-2 py-0.5 font-mono text-[9px] uppercase tracking-label ${maturityStyle[row.maturity]}`}
+                  className={`shrink-0 rounded-full border px-2 py-0.5 font-mono text-[9px] uppercase tracking-label ${maturityStyle[row.maturity]}`}
                 >
                   {row.maturity}
                 </span>
               </div>
-              <p className="mb-1 font-mono text-[10px] uppercase tracking-label text-mute">
-                {row.domain}
-              </p>
-              <h3 className="font-display text-lg font-semibold tracking-tight text-chalk sm:text-xl">
-                {row.capability}
-              </h3>
-              <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-mute">
-                {row.notes}
-              </p>
-              <div className="mt-4 flex items-end justify-between gap-2 border-t border-white/10 pt-3">
-                <p className="font-mono text-[10px] text-fog/80">{row.stack}</p>
-                <p className="shrink-0 font-mono text-[10px] text-signal">
-                  {row.throughput}
-                </p>
+              <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                {row.stack.split(" · ").slice(0, 4).map((tech) => (
+                  <span
+                    key={tech}
+                    className="border border-white/10 bg-black/30 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-label text-mute"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
-              <div className="pointer-events-none absolute -right-4 -top-4 h-16 w-16 rounded-full border border-white/5 transition-colors group-hover:border-signal/20" />
             </motion.article>
           ))}
         </motion.div>
 
         <motion.div
-          className="mt-4 flex flex-wrap gap-1.5 sm:mt-5"
-          initial={{ opacity: 0, y: 16 }}
+          className="mt-2 grid gap-2 sm:grid-cols-3"
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          transition={{ delay: 0.08, duration: 0.45 }}
         >
-          {STACK_ITEMS.map((item) => (
-            <span
-              key={item.id}
-              className="inline-flex items-center gap-2 border border-white/10 bg-black/30 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-label text-fog backdrop-blur-sm"
-            >
-              {item.name}
-              <span className="text-signal">{item.level}</span>
-            </span>
-          ))}
+          {(Object.keys(stackByCategory) as (keyof typeof stackByCategory)[]).map(
+            (cat) => (
+              <div
+                key={cat}
+                className="border border-white/10 bg-black/30 px-3 py-2.5 backdrop-blur-sm"
+              >
+                <p className="mb-2 font-mono text-[9px] uppercase tracking-label text-signal">
+                  {categoryLabel[cat]}
+                </p>
+                <div className="flex flex-wrap gap-1">
+                  {stackByCategory[cat].map((item) => (
+                    <span
+                      key={item.id}
+                      className="inline-flex items-center gap-1.5 border border-white/10 bg-black/40 px-2 py-1 font-mono text-[9px] uppercase tracking-label text-fog"
+                      title={item.note}
+                    >
+                      {item.name}
+                      <span className="text-signal">{item.level}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ),
+          )}
         </motion.div>
       </div>
     </section>

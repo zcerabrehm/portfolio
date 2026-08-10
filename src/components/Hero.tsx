@@ -12,8 +12,8 @@ const CODE_LOOP: readonly string[] = [
   "$ whoami",
   "full stack + ui/ux · philippines",
   "",
-  "$ day_job",
-  "web developer · shipping live sites",
+  "$ full_time",
+  "web developer · 5pm–2am ph",
   "",
   "$ also_into",
   "server security tests",
@@ -25,13 +25,19 @@ const CODE_LOOP: readonly string[] = [
   "",
 ];
 
-
-
 function lineClassName(line: string): string {
   if (!line) return "h-3";
   if (line.startsWith("✓") || line.startsWith("→")) return "text-mute";
   if (line.startsWith("$")) return "text-signal/90";
-  if (line.startsWith("const ") || line.startsWith("if ") || line.startsWith("score") || line.startsWith("export") || line.startsWith("  ") || line.startsWith("queue") || line === "}")
+  if (
+    line.startsWith("const ") ||
+    line.startsWith("if ") ||
+    line.startsWith("score") ||
+    line.startsWith("export") ||
+    line.startsWith("  ") ||
+    line.startsWith("queue") ||
+    line === "}"
+  )
     return "text-fog";
   return "text-fog";
 }
@@ -243,9 +249,9 @@ export default function Hero() {
               animate="show"
               className="mx-auto mt-5 max-w-md text-pretty font-mono text-[13px] leading-relaxed text-mute sm:mt-5 sm:text-[13px] lg:mx-0"
             >
-              Full stack builds and clean UI — from the interface people touch
-              to the backend that keeps it running. Open for collabs over
-              email&nbsp;or&nbsp;Discord.
+              Full stack builds and clean UI, from the interface people touch to
+              the backend that keeps it running. Even if i'm busy, feel free to
+              say hello :) Open for collabs over email.
             </motion.p>
 
             <motion.div
@@ -262,7 +268,9 @@ export default function Hero() {
                 data-cursor="hello"
                 onClick={(e) => {
                   e.preventDefault();
-                  openInNewTab(mailHref(SITE.email, "Hello from alenguiwan.dev"));
+                  openInNewTab(
+                    mailHref(SITE.email, "Hello from alenguiwan.dev"),
+                  );
                 }}
                 className="group inline-flex items-center gap-2 rounded-full border border-signal bg-signal px-5 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-label text-void transition-[transform,box-shadow] duration-200 ease-out-expo hover:-translate-y-0.5 hover:shadow-signal"
               >
@@ -286,6 +294,35 @@ export default function Hero() {
                 <MessageCircle size={14} className="text-signal" />
                 Discord
               </a>
+              <a
+                href={SITE.github.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="github"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openInNewTab(SITE.github.href);
+                }}
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-5 py-2.5 font-mono text-[11px] uppercase tracking-label text-fog backdrop-blur-md transition-[border-color,color,transform] duration-200 ease-out-expo hover:-translate-y-0.5 hover:border-signal/50 hover:text-chalk"
+              >
+                GitHub
+              </a>
+              {SITE.socials.map((social) => (
+                <a
+                  key={social.href}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="linkedin"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openInNewTab(social.href);
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-5 py-2.5 font-mono text-[11px] uppercase tracking-label text-fog backdrop-blur-md transition-[border-color,color,transform] duration-200 ease-out-expo hover:-translate-y-0.5 hover:border-signal/50 hover:text-chalk"
+                >
+                  {social.label}
+                </a>
+              ))}
             </motion.div>
           </div>
 
