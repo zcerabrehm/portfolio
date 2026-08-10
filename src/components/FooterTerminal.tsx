@@ -118,7 +118,7 @@ export default function FooterTerminal({ toast }: Props) {
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="grid items-start gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12"
+          className="grid items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12"
         >
           <div className="text-center lg:col-span-5 lg:text-left">
             <motion.p
