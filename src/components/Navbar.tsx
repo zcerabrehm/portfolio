@@ -29,10 +29,10 @@ export default function Navbar({ onOpenPalette }: Props) {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
       <div
-        className={`pointer-events-auto mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full border px-2 py-1.5 shadow-dock backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 ease-out-expo sm:px-3 ${
+        className={`pointer-events-auto mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full border px-2 py-1.5 shadow-dock transition-[background-color,border-color,box-shadow] duration-300 ease-out-expo sm:px-3 ${
           scrolled
-            ? "border-white/15 bg-black/55"
-            : "border-white/10 bg-black/40"
+            ? "border-white/15 bg-black/80"
+            : "border-white/10 bg-black/70"
         }`}
       >
         <a

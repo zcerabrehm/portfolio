@@ -16,12 +16,14 @@ const maturityStyle: Record<string, string> = {
 const stackByCategory = {
   runtime: STACK_ITEMS.filter((s) => s.category === "runtime"),
   lowcode: STACK_ITEMS.filter((s) => s.category === "lowcode"),
+  ops: STACK_ITEMS.filter((s) => s.category === "ops"),
   hardware: STACK_ITEMS.filter((s) => s.category === "hardware"),
 };
 
 const categoryLabel: Record<keyof typeof stackByCategory, string> = {
   runtime: "Full code",
   lowcode: "Low code",
+  ops: "DevOps",
   hardware: "Hardware",
 };
 
@@ -39,7 +41,7 @@ export default function CapabilitiesTable() {
   return (
     <section
       id="specs"
-      className="snap-section snap-section--flow relative isolate flex flex-col justify-center border-b border-white/10"
+      className="snap-section relative isolate flex flex-col justify-center border-b border-white/10"
     >
       <LivingBackground variant="carbon" />
 
@@ -186,7 +188,7 @@ export default function CapabilitiesTable() {
         </motion.div>
 
         <motion.div
-          className="mt-2 grid gap-2 sm:grid-cols-3"
+          className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-4"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}

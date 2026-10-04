@@ -89,6 +89,7 @@ export interface SiteMeta {
   version: string;
   discord: { label: string; href: string; handle: string };
   github: { label: string; href: string; handle: string };
+  spotify: { label: string; href: string; handle: string };
   socials: { label: string; href: string; handle: string }[];
 }
 
@@ -134,6 +135,11 @@ export const SITE: SiteMeta = {
       handle: "alen-guiwan",
     },
   ],
+  spotify: {
+    label: "Spotify",
+    href: "https://open.spotify.com/user/rjgs0d6irt7kuowsw6zpe1l5m?si=b616f291ab2c45dd",
+    handle: "listen",
+  },
 };
 
 export const NAV_LINKS: NavLink[] = [
@@ -148,15 +154,15 @@ export const ABOUT = {
   kicker: "01 · About",
   title: "A bit about me",
   body: [
-    "Hey, I'm Alen. I like building things people can actually click, use, and trust. Some days that is a clean landing page. Other days it is a full app, a CRM flow, or even a little ESP32 box talking to the\u00A0cloud.",
-    "I work as a web developer, and on the side I take on projects that need both design sense and real code. I am easy to talk to, quick to reply, and happiest when the work\u00A0ships.",
+    "Hey, I'm Alen. I like building things people can actually click, use, and trust, and I don't take myself too seriously while doing it.",
+    "I work as a web developer, and on the side I take projects that need both a good eye and real code. Easy to talk to, quick to reply, and happiest around family, friends, and work that actually\u00A0ships.",
   ],
   image: "/projects/about/portrait.jpg",
   imageLabel: "Photo coming soon",
   facts: [
     { label: "Based", value: "Philippines" },
     { label: "Focus", value: "Full stack + UI/UX" },
-    { label: "Also into", value: "PC builds · audio gear" },
+    { label: "Also", value: "DevOps" },
   ],
 };
 
@@ -306,6 +312,7 @@ export const STACK_ITEMS: StackItem[] = [
   { id: "wix", name: "Wix", category: "lowcode", level: 82, note: "Fast launches" },
   { id: "esp", name: "ESP32", category: "hardware", level: 86, note: "Device + cloud link" },
   { id: "arduino", name: "Arduino", category: "hardware", level: 84, note: "Prototyping" },
+  { id: "devops", name: "DevOps", category: "ops", level: 86, note: "Deploy and keep it up" },
 ];
 
 export const SPEC_ROWS: SpecRow[] = [
@@ -528,5 +535,14 @@ export const COMMANDS: CommandItem[] = [
     keywords: ["linkedin", "social", "profile"],
     action: "external",
     payload: SITE.socials[0].href,
+  },
+  {
+    id: "act-spotify",
+    group: "action",
+    label: "Open Spotify",
+    hint: SITE.spotify.handle,
+    keywords: ["spotify", "music", "playlist"],
+    action: "external",
+    payload: SITE.spotify.href,
   },
 ];

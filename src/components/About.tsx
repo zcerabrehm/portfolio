@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import { ABOUT } from "../data/portfolioData";
+import { ABOUT, SITE } from "../data/portfolioData";
+import { openInNewTab } from "../lib/links";
 import {
   staggerContainer,
   staggerItem,
@@ -8,8 +10,38 @@ import {
 } from "../lib/motion";
 import LivingBackground from "./LivingBackground";
 
+const shots = [
+  {
+    src: "/projects/about/chess.png",
+    alt: "Alen playing chess",
+    label: "my losing hobby",
+    pos: "object-[center_40%]",
+  },
+  {
+    src: "/projects/about/photography.jpg",
+    alt: "Alen with a camera",
+    label: "my expensive hobby",
+    pos: "object-[30%_center]",
+  },
+];
+
 export default function About() {
   const [imgOk, setImgOk] = useState(true);
+  const [open, setOpen] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (open == null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(null);
+    };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   return (
     <section
@@ -35,7 +67,7 @@ export default function About() {
         01
       </motion.span>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24 md:py-28">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <motion.div
           className="mb-8 text-center sm:mb-10"
           variants={staggerContainer}
@@ -117,7 +149,56 @@ export default function About() {
               ))}
             </div>
 
-            <div className="mt-8 grid gap-2 text-left sm:grid-cols-3">
+            <a
+              href={SITE.spotify.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="spotify"
+              onClick={(e) => {
+                e.preventDefault();
+                openInNewTab(SITE.spotify.href);
+              }}
+              className="mt-6 flex items-center gap-3 border border-white/15 bg-black/40 p-2 text-left transition-colors hover:border-signal/40"
+            >
+                <img
+                  src="/projects/about/spotify.png"
+                  alt=""
+                  className="h-16 w-16 shrink-0 bg-black object-contain p-1"
+                />
+                <span className="min-w-0">
+                  <span className="block font-mono text-[10px] uppercase tracking-label text-signal">
+                    Off the clock
+                  </span>
+                  <span className="mt-0.5 block font-display text-lg font-semibold text-chalk">
+                    Spotify
+                  </span>
+                  <span className="block font-mono text-[11px] text-mute">
+                    or check out what I vibe with :)
+                  </span>
+                </span>
+            </a>
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {shots.map((shot, i) => (
+                <button
+                  key={shot.label}
+                  type="button"
+                  onClick={() => setOpen(i)}
+                  className="relative overflow-hidden border border-white/15 bg-black/50 text-left transition-colors hover:border-signal/40"
+                >
+                  <img
+                    src={shot.src}
+                    alt={shot.alt}
+                    className={`aspect-[4/3] w-full object-cover ${shot.pos}`}
+                  />
+                  <span className="absolute bottom-1.5 left-1.5 max-w-[90%] border border-white/15 bg-black/70 px-1.5 py-0.5 font-mono text-[10px] normal-case tracking-normal text-chalk">
+                    {shot.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-4 grid gap-2 text-left sm:grid-cols-3">
               {ABOUT.facts.map((fact) => (
                 <div
                   key={fact.label}
@@ -135,6 +216,39 @@ export default function About() {
           </motion.div>
         </motion.div>
       </div>
+
+      {open != null
+        ? createPortal(
+            <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-8">
+              <button
+                type="button"
+                className="absolute inset-0 bg-black/80"
+                aria-label="Close photo"
+                onClick={() => setOpen(null)}
+              />
+              <figure className="relative z-10 w-full max-w-4xl overflow-hidden border border-white/15 bg-black">
+                <img
+                  src={shots[open].src}
+                  alt={shots[open].alt}
+                  className="max-h-[78vh] w-full object-contain"
+                />
+                <figcaption className="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3">
+                  <p className="font-mono text-[12px] normal-case tracking-normal text-mute">
+                    {shots[open].label}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(null)}
+                    className="rounded-full border border-white/15 px-4 py-2 font-mono text-[10px] uppercase tracking-label text-mute hover:border-signal/40 hover:text-signal"
+                  >
+                    Close
+                  </button>
+                </figcaption>
+              </figure>
+            </div>,
+            document.body,
+          )
+        : null}
     </section>
   );
 }

@@ -1,5 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Variant = "hero" | "slate" | "black" | "carbon" | "ink" | "void";
 
@@ -121,78 +120,50 @@ const orbs: Record<
   ],
 };
 
-function useLiteMotion() {
-  const reduce = useReducedMotion();
-  const [lite, setLite] = useState(true);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px), (pointer: coarse)");
-    const sync = () => setLite(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-
-  return Boolean(reduce) || lite;
-}
-
 export default function LivingBackground({ variant = "void" }: Props) {
   const blobs = orbs[variant] ?? orbs.void;
-  const lite = useLiteMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const [on, setOn] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setOn(entry.isIntersecting),
+      { rootMargin: "120px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <div className="living-bg" aria-hidden="true">
+    <div
+      ref={ref}
+      className={`living-bg${on ? " living-bg--on" : ""}`}
+      aria-hidden="true"
+    >
       <div className={`living-bg__base living-bg__base--${variant}`} />
 
-      {blobs.map((b, i) =>
-        lite ? (
-          <div
-            key={`${variant}-${i}`}
-            className="living-bg__orb"
-            style={{
-              width: b.size,
-              height: b.size,
-              left: b.x,
-              top: b.y,
-              background: `radial-gradient(circle, ${b.color} 0%, transparent 70%)`,
-              marginLeft: `calc(${b.size} / -2)`,
-              marginTop: `calc(${b.size} / -2)`,
-            }}
-          />
-        ) : (
-          <motion.div
-            key={`${variant}-${i}`}
-            className="living-bg__orb"
-            style={{
-              width: b.size,
-              height: b.size,
-              left: b.x,
-              top: b.y,
-              background: `radial-gradient(circle, ${b.color} 0%, transparent 70%)`,
-              marginLeft: `calc(${b.size} / -2)`,
-              marginTop: `calc(${b.size} / -2)`,
-            }}
-            animate={{
-              x: [0, 40, -30, 20, 0],
-              y: [0, -35, 25, -15, 0],
-              scale: [1, 1.12, 0.94, 1.08, 1],
-            }}
-            transition={{
-              duration: b.duration,
-              delay: b.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ),
-      )}
+      {on
+        ? blobs.map((b, i) => (
+            <div
+              key={`${variant}-${i}`}
+              className="living-bg__orb"
+              style={{
+                width: b.size,
+                height: b.size,
+                left: b.x,
+                top: b.y,
+                background: `radial-gradient(circle, ${b.color} 0%, transparent 70%)`,
+                marginLeft: `calc(${b.size} / -2)`,
+                marginTop: `calc(${b.size} / -2)`,
+              }}
+            />
+          ))
+        : null}
 
-      <div className={`living-bg__grid living-bg__grid--${variant}`} />
-      {!lite ? (
-        <>
-          <div className="living-bg__drift" />
-          <div className="living-bg__shine" />
-        </>
+      {on ? (
+        <div className={`living-bg__grid living-bg__grid--${variant}`} />
       ) : null}
       <div className="living-bg__scan" />
     </div>

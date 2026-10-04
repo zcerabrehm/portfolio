@@ -221,7 +221,7 @@ export default function SiteFooter() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-cursor="linkedin"
+                  data-cursor={social.label.toLowerCase()}
                   onClick={(e) => {
                     e.preventDefault();
                     openInNewTab(social.href);

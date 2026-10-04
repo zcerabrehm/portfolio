@@ -39,9 +39,7 @@ export default function ParticleScene({
     let running = false;
 
     const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-    renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.5),
-    );
+    renderer.setPixelRatio(1);
     renderer.setSize(width, height, false);
     renderer.domElement.style.display = "block";
     renderer.domElement.style.position = "absolute";
@@ -60,7 +58,7 @@ export default function ParticleScene({
     camera.position.set(0, 0, mobile ? 10 : 9);
     camera.lookAt(0, 0, 0);
 
-    const COUNT = reduce ? 500 : mobile ? 900 : 1400;
+    const COUNT = reduce ? 180 : mobile ? 360 : 520;
     const positions = new Float32Array(COUNT * 3);
     const colors = new Float32Array(COUNT * 3);
     const gold = new THREE.Color(accent);
@@ -104,15 +102,6 @@ export default function ParticleScene({
     points.position.set(0, 0, 0);
     scene.add(points);
 
-    let targetX = 0;
-    let targetY = 0;
-    const onMove = (e: MouseEvent) => {
-      if (!active || mobile) return;
-      targetX = (e.clientX / window.innerWidth - 0.5) * 2;
-      targetY = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
-
     const onResize = () => {
       width = Math.max(mount.clientWidth || window.innerWidth, 1);
       height = Math.max(mount.clientHeight || window.innerHeight, 1);
@@ -141,16 +130,6 @@ export default function ParticleScene({
       // Gentle spin around origin — no lateral drift
       points.rotation.y = t * rotY;
       points.rotation.x = Math.sin(t * 0.12) * rotXAmp;
-      points.position.set(0, 0, 0);
-
-      if (!mobile) {
-        camera.position.x += (targetX * 0.18 - camera.position.x) * 0.04;
-        camera.position.y += (-targetY * 0.12 - camera.position.y) * 0.04;
-        camera.position.z = 9;
-      } else {
-        camera.position.set(0, 0, 10);
-      }
-      camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
       raf = requestAnimationFrame(tick);
     };
@@ -183,7 +162,6 @@ export default function ParticleScene({
       return () => {
         stop();
         io.disconnect();
-        window.removeEventListener("mousemove", onMove);
         window.removeEventListener("resize", onResize);
         ro?.disconnect();
         geometry.dispose();
@@ -197,7 +175,6 @@ export default function ParticleScene({
 
     return () => {
       stop();
-      window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
       ro?.disconnect();
       geometry.dispose();

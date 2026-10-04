@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 const INTERACTIVE =
   "a, button, [data-magnetic], [data-cursor], input, textarea, [role='button']";
@@ -13,8 +13,6 @@ export default function CustomCursor() {
 
   const mx = useMotionValue(-9999);
   const my = useMotionValue(-9999);
-  const ringX = useSpring(mx, { damping: 28, stiffness: 340, mass: 0.55 });
-  const ringY = useSpring(my, { damping: 28, stiffness: 340, mass: 0.55 });
 
   useEffect(() => {
     const mq = window.matchMedia("(pointer: fine)");
@@ -42,8 +40,10 @@ export default function CustomCursor() {
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement | null;
       const el = t?.closest?.(INTERACTIVE) as HTMLElement | null;
-      setLabel(el?.getAttribute?.("data-cursor") ?? "");
-      setHovering(!!el);
+      const next = el?.getAttribute?.("data-cursor") ?? "";
+      const nextHover = !!el;
+      setLabel((cur) => (cur === next ? cur : next));
+      setHovering((cur) => (cur === nextHover ? cur : nextHover));
     };
 
     window.addEventListener("mousemove", move, { passive: true });
@@ -79,7 +79,7 @@ export default function CustomCursor() {
       />
       <motion.div
         className="absolute left-0 top-0 flex items-center justify-center rounded-full border border-white/55 will-change-transform"
-        style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
+        style={{ x: mx, y: my, translateX: "-50%", translateY: "-50%" }}
         animate={{
           width: hovering ? 92 : 42,
           height: hovering ? 92 : 42,
